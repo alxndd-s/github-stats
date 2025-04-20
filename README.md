@@ -24,7 +24,7 @@ Antes de começar, verifique se você atendeu aos seguintes requisitos:
 
 Para instalar o GitHub Language Stats, siga estas etapas:
 
-Linux e macOS:
+Linux e Windows:
 ```
 git clone https://github.com/alxndd-s/github-stats
 cd github-stats
