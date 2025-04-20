@@ -26,17 +26,11 @@ const COLORS = [
     "#8dd1e1", "#a4de6c", "#d0ed57", "#ffbb28", "#ff6666"
 ];
 
-// const KeyCodes = {
-//     comma: 188,
-//     enter: 13,
-// };
-
-// const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 export default function Dashboard() {
     const [stats, setStats] = useState<StatsProps | null>(null);
     const [loading, setLoading] = useState(false);
-    const [initialLoading, setInitialLoading] = useState(true); // Novo estado para loading inicial
+    const [initialLoading, setInitialLoading] = useState(true);
     const [tags, setTags] = useState<Tag[]>([]);
     const [repoNames, setRepoNames] = useState<RepoName[]>([]);
     const [showRepoList, setShowRepoList] = useState(false);
@@ -69,20 +63,20 @@ export default function Dashboard() {
             } catch (error) {
                 console.error("Erro ao buscar dados:", error);
             } finally {
-                setInitialLoading(false); // Finaliza o loading inicial
+                setInitialLoading(false);
             }
         };
         fetchNames();
     }, []);
 
     useEffect(() => {
-        // Update tags when repo selections change
+
         const selectedRepos = repoNames.filter(repo => repo.selected);
         setTags(
             selectedRepos.map(repo => ({
               id: repo.name,
               text: repo.name,
-              className: '' // ou algum valor como 'tag-custom' se quiser aplicar estilo
+              className: ''
             }))
           );
     }, [repoNames]);
@@ -94,7 +88,7 @@ export default function Dashboard() {
         ));
     };
 
-    const handleAddition = (tag: { id: string; text: string }) => {
+    const handleAddition = (tag: Tag) => {
         const repoExists = repoNames.some(repo => repo.name === tag.text);
     
         if (!repoExists) {
@@ -108,7 +102,7 @@ export default function Dashboard() {
         ));
     };
 
-    const handleDrag = (tag: {id: string, text: string}, currPos: number, newPos: number) => {
+    const handleDrag = (tag: Tag, currPos: number, newPos: number) => {
         const newTags = tags.slice();
         newTags.splice(currPos, 1);
         newTags.splice(newPos, 0, { ...tag, className: 'tag-padrao' });
@@ -137,7 +131,6 @@ export default function Dashboard() {
         }));
     };
 
-    // Componente de Loading para a busca inicial
     const InitialLoadingIndicator = () => (
         <div className="flex flex-col items-center justify-center space-y-4">
             <div className="relative">
@@ -151,7 +144,6 @@ export default function Dashboard() {
         </div>
     );
 
-    // Componente de Loading para a análise
     const AnalysisLoadingIndicator = () => (
         <div className="flex flex-col items-center justify-center space-y-4">
             <div className="relative">
@@ -312,14 +304,9 @@ export default function Dashboard() {
                                                 />
                                             ))}
                                     </div>
-                                    {/* <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                        <span className="text-xs font-medium text-gray-400 bg-gray-900/80 px-2 py-0.5 rounded-full">
-                                            {stats.total_bytes.toLocaleString()} bytes analisados
-                                        </span>
-                                    </div> */}
+                                    
                                 </div>
 
-                                {/* Legenda */}
                                 <div className="mt-8 grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                                     {getPercentageData()
                                         .sort((a, b) => b.value - a.value)

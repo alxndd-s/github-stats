@@ -7,10 +7,8 @@ export async function handleGetStats(reposToIgnore?: string[] | []) {
         throw new Error('Token do GitHub não fornecido.');
     }
 
-    // Caminho para o executável
     const executablePath = 'src/app/services/scripts/fetchGit.exe';
     
-    // Argumentos para o executável (não inclua o caminho aqui)
     const args = [token];
 
     if (reposToIgnore && reposToIgnore.length > 0) {
@@ -19,7 +17,6 @@ export async function handleGetStats(reposToIgnore?: string[] | []) {
 
     return new Promise((resolve, reject) => {
         
-        // Chama o executável diretamente, não através do Python
         const process = spawn(executablePath, args);
 
         let output = '';
@@ -39,7 +36,7 @@ export async function handleGetStats(reposToIgnore?: string[] | []) {
             }
 
             try {
-                // Tenta encontrar a última linha que contém JSON válido
+
                 const jsonLines = output.split('\n').filter(line => {
                     line = line.trim();
                     return line.startsWith('{') && line.endsWith('}');
@@ -49,7 +46,6 @@ export async function handleGetStats(reposToIgnore?: string[] | []) {
                     return reject(new Error('Nenhum JSON válido encontrado na saída'));
                 }
 
-                // Pega o último JSON impresso (seu código imprime duas vezes)
                 const result = JSON.parse(jsonLines[jsonLines.length - 1]);
                 resolve(result);
             } catch (err) {

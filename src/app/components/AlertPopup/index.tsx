@@ -7,7 +7,7 @@ interface AlertPopupProps {
 }
 
 const AlertPopup: React.FC<AlertPopupProps> = ({ message, onClose, type = 'info' }) => {
-  // Define cores baseadas no tipo de alerta
+
   const getColorClasses = () => {
     switch (type) {
       case 'success':
