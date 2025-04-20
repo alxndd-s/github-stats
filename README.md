@@ -35,7 +35,7 @@ npm install
 
 Para usar GitHub Language Stats, siga estas etapas:
 
-1. Adicione o seu token gerado no https://github.com/settings/tokens, (o token deve ser do tipo classic conter as permissoes de leitura) no seu arquivo .env com a chave 'TOKEN' 
+1. Adicione o seu token gerado no https://github.com/settings/tokens, (o token deve ser do tipo classic e conter as permissoes de leitura) no seu arquivo .env com a chave 'TOKEN' 
 
 2. Inicie o servidor de desenvolvimento:
 

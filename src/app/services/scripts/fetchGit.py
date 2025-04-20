@@ -4,12 +4,18 @@ import aiohttp
 from aiohttp import ClientTimeout
 import json
 
-# Captura o token como argumento
+# Captura o token e repositórios para ignorar como argumentos
 if len(sys.argv) < 2:
-    print("Uso: python fetchGit.py <GITHUB_TOKEN>")
+    print("Uso: python fetchGit.py <GITHUB_TOKEN> [--ignore repo1 repo2 ...]")
     sys.exit(1)
 
 TOKEN = sys.argv[1]
+IGNORE_REPOS = []
+
+# Verifica se há repositórios para ignorar
+if '--ignore' in sys.argv:
+    ignore_index = sys.argv.index('--ignore')
+    IGNORE_REPOS = sys.argv[ignore_index + 1:]
 
 HEADERS = {
     'Authorization': f'token {TOKEN}',
@@ -20,9 +26,18 @@ TIMEOUT = ClientTimeout(total=30)
 
 async def listar_repositorios(session):
     try:
-        async with session.get('https://api.github.com/user/repos?per_page=100', headers=HEADERS, timeout=TIMEOUT) as resp:
-            data = await resp.json()
-            return [repo for repo in data if repo.get('private')]
+        repos = []
+        page = 1
+        while True:
+            async with session.get(f'https://api.github.com/user/repos?per_page=100&page={page}', 
+                                headers=HEADERS, timeout=TIMEOUT) as resp:
+                data = await resp.json()
+                if not data:
+                    break
+                # Filtra repositórios ignorados e adiciona todos (não apenas privados)
+                repos.extend([repo for repo in data if repo['name'] not in IGNORE_REPOS])
+                page += 1
+        return repos
     except Exception as e:
         print(f"Erro ao listar repositórios: {e}")
         return []
@@ -40,7 +55,7 @@ async def main():
         async with aiohttp.ClientSession(timeout=TIMEOUT) as session:
             repos = await listar_repositorios(session)
             if not repos:
-                print("Nenhum repositório privado encontrado ou erro na requisição.")
+                print("Nenhum repositório encontrado ou erro na requisição.")
                 return {}
 
             linguagens_totais = {}
@@ -67,7 +82,9 @@ async def main():
             # Cria o objeto final
             resultado_final = {
                 "total_bytes": total_bytes,
-                "langs": langs_array
+                "langs": langs_array,
+                "repos_analisados": len(repos),
+                "repos_ignorados": IGNORE_REPOS
             }
 
             # Imprime o resultado formatado (opcional)
@@ -81,4 +98,4 @@ async def main():
 
 if __name__ == '__main__':
     resultado = asyncio.run(main())
-    print(json.dumps(resultado)) 
+    print(json.dumps(resultado))
