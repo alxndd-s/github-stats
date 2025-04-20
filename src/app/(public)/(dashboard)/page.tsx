@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { ResponsiveContainer } from "recharts";
 import { Loader2 } from 'lucide-react';
-import { WithContext as ReactTags, Tag } from 'react-tag-input';
+import { WithContext as ReactTags, Tag, SEPARATORS } from 'react-tag-input';
+import AlertPopup from "@/app/components/AlertPopup";
 
 type LangProps = {
     lang: string;
@@ -39,6 +40,8 @@ export default function Dashboard() {
     const [tags, setTags] = useState<Tag[]>([]);
     const [repoNames, setRepoNames] = useState<RepoName[]>([]);
     const [showRepoList, setShowRepoList] = useState(false);
+    const [showAlert, setShowAlert] = useState(false);
+    const [alertMessage, setAlertMessage] = useState('');
 
     const fetchStats = async () => {
         setLoading(true);
@@ -91,7 +94,15 @@ export default function Dashboard() {
         ));
     };
 
-    const handleAddition = (tag: {id: string, text: string}) => {
+    const handleAddition = (tag: { id: string; text: string }) => {
+        const repoExists = repoNames.some(repo => repo.name === tag.text);
+    
+        if (!repoExists) {
+            setAlertMessage(`Não possui um repositório com nome '${tag.text}' nos seus repositórios.'`);
+            setShowAlert(true);
+            return;
+        }
+    
         setRepoNames(repoNames.map(repo => 
             repo.name === tag.text ? { ...repo, selected: true } : repo
         ));
@@ -180,7 +191,7 @@ export default function Dashboard() {
                                     handleDelete={handleDelete}
                                     handleAddition={handleAddition}
                                     handleDrag={handleDrag}
-                                    separators={['13', '188']} // <- atualizado aqui
+                                    separators={[SEPARATORS.ENTER, SEPARATORS.COMMA,SEPARATORS.TAB]}
                                     inputFieldPosition="bottom"
                                     autocomplete
                                     placeholder="Digite e pressione Enter"
@@ -337,6 +348,7 @@ export default function Dashboard() {
             ) : (
                 <p className="text-gray-400">Nenhum dado encontrado.</p>
             )}
+            {showAlert && <AlertPopup message={alertMessage} onClose={() => setShowAlert(false)} type="info" />}
         </div>
     );
 }
