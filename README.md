@@ -1,10 +1,10 @@
 # GitHub Language Stats
 
-![GitHub repo size](https://img.shields.io/github/repo-size/alxndd-s/GitHub-Stats?style=for-the-badge)
-![GitHub language count](https://img.shields.io/github/languages/count/alxndd-s/GitHub-Stats?style=for-the-badge)
-![GitHub forks](https://img.shields.io/github/forks/alxndd-s/GitHub-Stats?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/alxndd-s/GitHub-Stats?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/alxndd-s/GitHub-Stats?style=for-the-badge)
+![GitHub repo size](https://img.shields.io/github/repo-size/alxndd-s/github-stats?style=for-the-badge)
+![GitHub language count](https://img.shields.io/github/languages/count/alxndd-s/github-stats?style=for-the-badge)
+![GitHub forks](https://img.shields.io/github/forks/alxndd-s/github-stats?style=for-the-badge)
+![Bitbucket open issues](https://img.shields.io/bitbucket/issues/alxndd-s/github-stats?style=for-the-badge)
+![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/alxndd-s/github-stats?style=for-the-badge)
 
 <img src="public/screenshot.png" alt="Gráfico de linguagens">
 
@@ -28,8 +28,8 @@ Para instalar o GitHub Language Stats, siga estas etapas:
 
 Linux e macOS:
 
-git clone https://github.com/alxndd-s/GitHub-Stats
-cd GitHub-Stats
+git clone https://github.com/alxndd-s/github-stats
+cd github-stats
 npm install
 
 ## ☕ Usando GitHub Language Stats
