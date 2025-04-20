@@ -3,8 +3,6 @@
 ![GitHub repo size](https://img.shields.io/github/repo-size/alxndd-s/github-stats?style=for-the-badge)
 ![GitHub language count](https://img.shields.io/github/languages/count/alxndd-s/github-stats?style=for-the-badge)
 ![GitHub Last Commit](https://img.shields.io/github/last-commit/alxndd-s/github-stats?style=for-the-badge)
-![Bitbucket open issues](https://img.shields.io/bitbucket/issues/alxndd-s/github-stats?style=for-the-badge)
-![Bitbucket open pull requests](https://img.shields.io/bitbucket/pr-raw/alxndd-s/github-stats?style=for-the-badge)
 
 <img src="public/screenshot.png" alt="Gráfico de linguagens">
 
