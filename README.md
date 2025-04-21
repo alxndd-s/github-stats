@@ -4,7 +4,7 @@
 ![GitHub language count](https://img.shields.io/github/languages/count/alxndd-s/github-stats?style=for-the-badge)
 ![GitHub Last Commit](https://img.shields.io/github/last-commit/alxndd-s/github-stats?style=for-the-badge)
 
-<img src="public/screenshot_1.png" alt="Gráfico de linguagens">
+<img src="public/screenshot_1.png" alt="App Screenshot 1">
 
 > Visualizador de estatísticas de linguagem dos seus repositórios GitHub. A aplicação analisa todos seus projetos e exibe um gráfico interativo mostrando a distribuição das linguagens de programação utilizadas.
 
@@ -35,8 +35,8 @@ npm install
 
 Para usar GitHub Language Stats, siga estas etapas:
 
-1. Gere seu token em https://github.com/settings/tokens, o token deve ser do tipo classic e conter as permissoes de leitura.
-
+1. Gere seu token em https://github.com/settings/tokens, o token deve ser do tipo classic e conter as permissoes do escopo "repos".
+<img src="public/screenshot_5.png" alt="Token scope">
 2. Crie um arquivo .env na raiz do projeto com a chave TOKEN = 'ghp_pa4568d4sa.......'
 
 3. Inicie o servidor de desenvolvimento com :
@@ -49,11 +49,11 @@ npm run dev
 
 4. Na tela inicial após carregar todos os seus repositórios, poderá incluir repositórios para ignorar, digitando, ou escolhendo da lista !
 
-<img src="public/screenshot_4.png" alt="Gráfico de linguagens">
+<img src="public/screenshot_4.png" alt="App Screenshot 4">
 
-<img src="public/screenshot_3.png" alt="Gráfico de linguagens">
+<img src="public/screenshot_3.png" alt="App Screenshot 3">
 
-<img src="public/screenshot_2.png" alt="Gráfico de linguagens">
+<img src="public/screenshot_2.png" alt="App Screenshot 2">
 
 
 
